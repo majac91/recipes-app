@@ -1,22 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import "./App.css";
+import RecipeList from "../src/components/RecipeList/RecipeList";
+// import { useSelector, useDispatch } from "react-redux";
+// import { setRecipe } from "./redux/recipe";
+import Parse from "parse";
+import AddRecipe from "./components/AddRecipe/AddRecipe";
 
 function App() {
+  useEffect(() => {
+    Parse.initialize(
+      "XZ6YC9lCXRffIFFOxbbsh9czQjsXofqYYA04UwWA",
+      "kNctq60zwQos33cEQaQ6zRLmgo1UtyU9kTAQRLMS"
+    );
+    Parse.serverURL = "https://parseapi.back4app.com/";
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <AddRecipe />
+        {/* <RecipeList></RecipeList> */}
       </header>
     </div>
   );
