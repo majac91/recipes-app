@@ -9,7 +9,7 @@ export const ingredientsSlice = createSlice({
   initialState,
   reducers: {
     setIngredients: (state, action) => {
-      state.ingredients = action.payload.selectedIngredients;
+      state.ingredients.push(action.payload.selectedIngredients);
     },
   },
 });

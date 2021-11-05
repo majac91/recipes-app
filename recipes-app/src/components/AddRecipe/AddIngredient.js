@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setIngredients } from "../../redux/ingredients";
 
@@ -19,30 +19,23 @@ const AddIngredient = () => {
     "Meat",
   ];
 
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [ingredient, setIngredient] = useState({
+    name: "",
+    quantity: "",
+  });
 
-  const [quantities, setQuantities] = useState();
-  const [input, setInput] = useState(""); // '' is the initial state value
-
-  const quantityRef = useRef();
-
-  useEffect(() => {
-    dispatch(
-      setIngredients({
-        selectedIngredients,
-      })
-    );
-  }, [dispatch, selectedIngredients]);
-
-  console.log(selectedIngredients);
-  function handleSelectedIngredients(e) {
-    setSelectedIngredients((prev) => {
-      return [...prev, e.target.value];
+  function handleFormValues(key, e) {
+    setIngredient((current) => {
+      return { ...current, [key]: e.target.value };
     });
   }
 
-  function handleAddQuantity(e) {
-    console.log(quantityRef.current);
+  function handleAddQuantity() {
+    dispatch(
+      setIngredients({
+        selectedIngredients: ingredient,
+      })
+    );
   }
 
   return (
@@ -52,12 +45,15 @@ const AddIngredient = () => {
           <div key={index}>
             <label>{item}</label>
             <input
-              onChange={handleSelectedIngredients}
               value={item}
+              onChange={(e) => handleFormValues("name", e)}
               type="checkbox"
-            ></input>
+            />
             <label>Quantity</label>
-            <input ref={quantityRef} type="text" />
+            <input
+              onChange={(e) => handleFormValues("quantity", e)}
+              type="text"
+            />
             <button onClick={handleAddQuantity}>+</button>
           </div>
         );

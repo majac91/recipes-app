@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setRecipe } from "../../redux/recipe";
 import { createRecipe } from "../../parse/api";
 import AddIngredient from "./AddIngredient";
-
-import { selectIngredients } from "../../redux/ingredients";
-import { selectQuantities } from "../../redux/ingredients";
 
 const AddRecipe = ({ onClick }) => {
   const dispatch = useDispatch();
@@ -39,7 +36,7 @@ const AddRecipe = ({ onClick }) => {
       })
     );
 
-    createRecipe(formValues);
+    // createRecipe(formValues);
   };
 
   return (
