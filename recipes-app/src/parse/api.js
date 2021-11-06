@@ -1,9 +1,7 @@
 import Parse from "parse";
 
 // Create a new recipe
-export async function createRecipe(values) {
-  console.log(values);
-
+export async function uploadRecipe(values) {
   let recipe = new Parse.Object("Recipe");
 
   recipe.set("name", values.name);
@@ -27,7 +25,6 @@ export async function retrieveRecipes() {
   const query = new Parse.Query(Recipes);
   const recipesQuery = await query.find();
 
-  console.log(recipesQuery);
   const retreivedList = [];
 
   for (let i = 0; i < recipesQuery.length; i++) {

@@ -1,22 +1,24 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setRecipe } from "../../redux/recipe";
-import { createRecipe } from "../../parse/api";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { uploadRecipe } from "../../parse/api";
 import AddIngredient from "./AddIngredient";
 
-const AddRecipe = ({ onClick }) => {
-  const dispatch = useDispatch();
-  const ingredients = useSelector((state) => state.ingrediendtList);
-
-  console.log(ingredients);
+const AddRecipe = () => {
+  const ingredientsList = useSelector((state) => state.ingrediendtList);
 
   const [formValues, setFormValues] = useState({
     name: "",
     source: "",
     time: "",
     instructions: "",
-    ingredients: ingredients,
+    ingredients: null,
   });
+
+  useEffect(() => {
+    setFormValues((current) => {
+      return { ...current, ingredients: ingredientsList.ingredients };
+    });
+  }, [ingredientsList]);
 
   function handleFormValues(key, e) {
     setFormValues((current) => {
@@ -24,24 +26,14 @@ const AddRecipe = ({ onClick }) => {
     });
   }
 
-  const handleAddRecipe = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(
-      setRecipe({
-        name: formValues.name,
-        source: formValues.source,
-        time: formValues.time,
-        instructions: formValues.instructions,
-      })
-    );
-
-    // createRecipe(formValues);
+    uploadRecipe(formValues);
   };
 
   return (
     <div>
-      <form onSubmit={(e) => handleAddRecipe(e)}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <input
           value={formValues.name}
           onChange={(e) => handleFormValues("name", e)}

@@ -14,8 +14,6 @@ export const ingredientsSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setIngredients } = ingredientsSlice.actions;
-export const selectIngredients = (state) => state.ingredients.ingredients;
 
 export default ingredientsSlice.reducer;

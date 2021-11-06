@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { setIngredients } from "../../redux/ingredients";
 
 const AddIngredient = () => {
-  const dispatch = useDispatch();
-
   const ingredients = [
     "Flour",
     "Milk",
@@ -19,18 +17,20 @@ const AddIngredient = () => {
     "Meat",
   ];
 
+  const dispatch = useDispatch();
+
   const [ingredient, setIngredient] = useState({
     name: "",
     quantity: "",
   });
 
-  function handleFormValues(key, e) {
+  function handleIngredientValues(key, e) {
     setIngredient((current) => {
       return { ...current, [key]: e.target.value };
     });
   }
 
-  function handleAddQuantity() {
+  function handleAddIngredient() {
     dispatch(
       setIngredients({
         selectedIngredients: ingredient,
@@ -46,15 +46,17 @@ const AddIngredient = () => {
             <label>{item}</label>
             <input
               value={item}
-              onChange={(e) => handleFormValues("name", e)}
+              onChange={(e) => handleIngredientValues("name", e)}
               type="checkbox"
             />
             <label>Quantity</label>
             <input
-              onChange={(e) => handleFormValues("quantity", e)}
+              onChange={(e) => handleIngredientValues("quantity", e)}
               type="text"
             />
-            <button onClick={handleAddQuantity}>+</button>
+            <button type="button" onClick={handleAddIngredient}>
+              +
+            </button>
           </div>
         );
       })}
