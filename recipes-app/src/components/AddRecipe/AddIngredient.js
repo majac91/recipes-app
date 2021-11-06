@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setIngredients } from "../../redux/ingredients";
 
+import styled from "styled-components";
+
+import AddIcon from "@mui/icons-material/Add";
+import { Checkbox, Input, Fab, Box, Container, Grid } from "@mui/material";
+
 const AddIngredient = () => {
   const ingredients = [
     "Flour",
@@ -14,7 +19,6 @@ const AddIngredient = () => {
     "Peppers",
     "Cheese",
     "Potatoes",
-    "Meat",
   ];
 
   const dispatch = useDispatch();
@@ -39,29 +43,48 @@ const AddIngredient = () => {
   }
 
   return (
-    <>
+    <Grid
+      container
+      rowSpacing={1}
+      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      sx={{ textAlign: "center" }}
+    >
       {ingredients.map((item, index) => {
         return (
-          <div key={index}>
+          <Grid item xs={6} key={index}>
             <label>{item}</label>
-            <input
+            <Checkbox
               value={item}
               onChange={(e) => handleIngredientValues("name", e)}
               type="checkbox"
             />
             <label>Quantity</label>
-            <input
+            <Input
               onChange={(e) => handleIngredientValues("quantity", e)}
               type="text"
+              sx={{ maxWidth: "50px" }}
             />
-            <button type="button" onClick={handleAddIngredient}>
-              +
-            </button>
-          </div>
+            <AddButton
+              size="small"
+              color="primary"
+              aria-label="add"
+              onClick={handleAddIngredient}
+              sx={{ m: 2 }}
+            >
+              <AddIcon />
+            </AddButton>
+          </Grid>
         );
       })}
-    </>
+    </Grid>
   );
 };
 
 export default AddIngredient;
+
+const AddButton = styled(Fab)`
+  && {
+    color: black;
+    background-color: #fef2e6;
+  }
+`;
