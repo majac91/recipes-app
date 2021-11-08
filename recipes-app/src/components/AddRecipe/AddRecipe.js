@@ -20,6 +20,9 @@ import {
 const AddRecipe = () => {
   const ingredientsList = useSelector((state) => state.ingrediendtList);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+
   const [formValues, setFormValues] = useState({
     name: "",
     source: "",
@@ -27,8 +30,6 @@ const AddRecipe = () => {
     instructions: "",
     ingredients: null,
   });
-
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setFormValues((current) => {
@@ -38,30 +39,53 @@ const AddRecipe = () => {
 
   function handleFormValues(key, e) {
     setFormValues((current) => {
-      return { ...current, [key]: e.target.value };
+      return { ...current, [key]: key === 'time' ? formattedTime(e.target.value) : e.target.value };
     });
   }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    uploadRecipe(formValues);
-    toggleModal();
-  };
 
   const toggleModal = () => {
     setIsOpen((prev) => !prev);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    uploadRecipe(formValues);
+
+    setFormValues({
+      name: "",
+      source: "",
+      time: "",
+      instructions: "",
+      ingredients: null,
+    })
+
+    toggleModal();
+
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000);
+  };
+
+  const formattedTime = (time) => {
+    const [hours, mins] = time.split(":");
+    if (hours !== "00") {
+      return `${time}h`;
+    } else {
+      return `${mins}min`;
+    }
+  };
+
   return (
     <header>
-      <AddButton
+      <Fab
         size="small"
-        color="primary"
+        color="success"
         aria-label="add"
         onClick={toggleModal}
       >
         <AddIcon />
-      </AddButton>
+      </Fab>
 
       <RecipeModal
         open={isOpen}
@@ -127,23 +151,13 @@ const AddRecipe = () => {
 
 export default AddRecipe;
 
-const AddButton = styled(Fab)`
-  && {
-    color: black;
-    background-color: #fef2e6;
-  }
-`;
 
 const RecipeModal = styled(Modal)`
    {
-    background-color: #eed6ca;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: scroll;
-    div {
-      background-color: #eed6ca;
-    }
   }
 `;
 
@@ -154,6 +168,7 @@ const Form = styled.form`
     justify-content: center;
     max-width: 70vw;
     margin: auto;
+    background-color: #FFFDF7;
   }
 `;
 

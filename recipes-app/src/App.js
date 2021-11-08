@@ -4,18 +4,15 @@ import AddRecipe from "./components/AddRecipe/AddRecipe";
 import Recipe from "./components/Recipe/Recipe";
 
 import ToolBar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
       <ToolBar sx={{ borderBottom: 1, borderColor: "divider" }}>
         <AddRecipe />
-        <Typography variant="h1" sx={{ margin: "auto" }}>
-          My recipes
-        </Typography>
+        <Link to='/' style={{ margin: "auto", textDecoration: 'none', color: '#070707', fontSize: '2rem' }}>My recipes</Link>
       </ToolBar>
       <Routes>
         <Route path="/" element={<RecipeList />} />

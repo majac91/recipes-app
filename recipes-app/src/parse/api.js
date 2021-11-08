@@ -1,5 +1,12 @@
 import Parse from "parse";
 
+Parse.initialize(
+  "XZ6YC9lCXRffIFFOxbbsh9czQjsXofqYYA04UwWA",
+  "kNctq60zwQos33cEQaQ6zRLmgo1UtyU9kTAQRLMS"
+);
+Parse.serverURL = "https://parseapi.back4app.com/";
+
+
 // Create a new recipe
 export async function uploadRecipe(values) {
   let recipe = new Parse.Object("Recipe");
@@ -40,9 +47,27 @@ export async function retrieveRecipes() {
       let listItem = { id, name, source, ingredients, time, instructions };
 
       retreivedList.push(listItem);
-      return retreivedList;
     }
+    return retreivedList;
+
   } catch {
     alert(`Error`);
   }
+}
+
+
+export async function deleteRecipe(id) {
+  const Recipe = Parse.Object.extend("Recipe");
+  const query = new Parse.Query(Recipe);
+  query.equalTo("objectId", id);
+  const deleteQuery = await query.find();
+
+  try {
+    await deleteQuery[0].destroy();
+    console.log("The object was deleted successfully.");
+  } catch (e) {
+    console.log("Delete failed!", e);
+  }
+
+
 }

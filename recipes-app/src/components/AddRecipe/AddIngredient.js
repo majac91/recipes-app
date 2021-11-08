@@ -5,7 +5,7 @@ import { setIngredients } from "../../redux/ingredients";
 import styled from "styled-components";
 
 import AddIcon from "@mui/icons-material/Add";
-import { Checkbox, Input, Fab, Box, Container, Grid } from "@mui/material";
+import { Checkbox, Input, Fab, Grid } from "@mui/material";
 
 const AddIngredient = () => {
   const ingredients = [

@@ -14,16 +14,15 @@ const RecipeList = () => {
   useEffect(() => {
     const fetchRecipesList = async () => {
       const response = await retrieveRecipes();
-      if (response) {
-        setList(response);
-        dispatch(setRecipeList(response));
-      }
+
+      setList(response);
+      dispatch(setRecipeList(response));
     };
     fetchRecipesList();
   }, [dispatch]);
 
   return (
-    <Container size="lg">
+    <Container size="lg" sx={{ pt: 10, display: 'flex', gap: 5 }}>
       {list &&
         list.map((recipe, index) => {
           return <RecipeListCard key={index} id={index} recipe={recipe} />;

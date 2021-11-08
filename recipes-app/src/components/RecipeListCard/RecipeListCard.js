@@ -11,18 +11,12 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+
 
 const RecipeListCard = ({ recipe }) => {
   const ellipsize = require("ellipsize");
 
-  const formattedTime = () => {
-    const [hours, mins] = recipe.time.split(":");
-    if (hours !== "00") {
-      return `${recipe.time}h`;
-    } else {
-      return `${mins}min`;
-    }
-  };
 
   const location = {
     pathname: `/recipe/${recipe.id}`,
@@ -32,7 +26,8 @@ const RecipeListCard = ({ recipe }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        <Link to={location}>
+        <Link to={location} style={{ textDecoration: 'none', color: '#070707' }}>
+
           <CardMedia
             component="img"
             height="160"
@@ -41,57 +36,66 @@ const RecipeListCard = ({ recipe }) => {
           />
           <CardContent>
             <Box>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="overline" component="h2">
                 {recipe.name}
               </Typography>
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "space-around",
                   mt: 3,
                   mb: 1,
+                  gap: 4
                 }}
               >
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body1" color="text.secondary" component="p"
+                >
                   {recipe.source}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {formattedTime()}
+                <Typography variant="body1" color="text.secondary" component="p"
+                >
+                  {recipe.time}
                 </Typography>
               </Box>
             </Box>
             <Box>
-              <Typography gutterBottom variant="overline" component="div">
-                Number of ingredients: {recipe.ingredients.length}
+              <Typography gutterBottom variant="body1" component="p">
+                Total ingredients: {recipe.ingredients.length}
               </Typography>
               {recipe.ingredients.map((ingredient, index) => {
                 if (recipe.ingredients.length >= 2) {
                   while (index <= 2) {
                     return (
-                      <Typography
-                        key={index}
-                        gutterBottom
-                        variant="body2"
-                        component="div"
-                      >
-                        {ingredient.name}
-                        {index === 2 && <p>...</p>}
-                      </Typography>
+                      <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                        <CheckCircle color='success' sx={{ fontSize: 20 }}></CheckCircle>
+                        <Typography
+                          gutterBottom
+                          variant="body2"
+                          component="p"
+                          sx={{ mb: 0 }}
+                        >
+                          {ingredient.name}
+                          {index === 2 && '...'}
+                        </Typography>
+                      </Box>
                     );
                   }
                 } else {
                   return (
-                    <Typography
-                      key={index}
-                      gutterBottom
-                      variant="body2"
-                      component="div"
-                    >
-                      {ingredient.name}
-                    </Typography>
+                    <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                      <CheckCircle color='success' sx={{ fontSize: 20 }}></CheckCircle>
+                      <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="p"
+                        sx={{ mb: 0 }}
+                      >
+                        {ingredient.name}
+                      </Typography>
+                    </Box>
                   );
                 }
               })}
+
             </Box>
             <Typography variant="body2" color="text.secondary">
               {ellipsize(recipe.instructions, 50)}
@@ -99,13 +103,11 @@ const RecipeListCard = ({ recipe }) => {
           </CardContent>
         </Link>
       </CardActionArea>
-
-      <CardActions>
-        <Button size="small">View</Button>
-        <Button size="small">Delete</Button>
-      </CardActions>
-    </Card>
+    </Card >
   );
 };
 
 export default RecipeListCard;
+
+
+
