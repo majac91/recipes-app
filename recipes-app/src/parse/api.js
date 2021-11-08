@@ -23,21 +23,26 @@ export async function uploadRecipe(values) {
 export async function retrieveRecipes() {
   const Recipes = Parse.Object.extend("Recipe");
   const query = new Parse.Query(Recipes);
-  const recipesQuery = await query.find();
 
   const retreivedList = [];
 
-  for (let i = 0; i < recipesQuery.length; i++) {
-    let object = recipesQuery[i];
-    let name = object.get("name");
-    let source = object.get("source");
-    let ingredients = object.get("ingredients");
-    let time = object.get("time");
-    let instructions = object.get("instructions");
-    let listItem = { name, source, ingredients, time, instructions };
-    retreivedList.push(listItem);
-  }
+  try {
+    const recipesQuery = await query.find();
 
-  console.log(retreivedList);
-  return retreivedList;
+    for (let i = 0; i < recipesQuery.length; i++) {
+      let object = recipesQuery[i];
+      let id = object.id;
+      let name = object.get("name");
+      let source = object.get("source");
+      let ingredients = object.get("ingredients");
+      let time = object.get("time");
+      let instructions = object.get("instructions");
+      let listItem = { id, name, source, ingredients, time, instructions };
+
+      retreivedList.push(listItem);
+      return retreivedList;
+    }
+  } catch {
+    alert(`Error`);
+  }
 }

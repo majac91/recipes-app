@@ -28,6 +28,8 @@ const AddRecipe = () => {
     ingredients: null,
   });
 
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     setFormValues((current) => {
       return { ...current, ingredients: ingredientsList.ingredients };
@@ -43,9 +45,8 @@ const AddRecipe = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     uploadRecipe(formValues);
+    toggleModal();
   };
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
     setIsOpen((prev) => !prev);
@@ -139,6 +140,7 @@ const RecipeModal = styled(Modal)`
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: scroll;
     div {
       background-color: #eed6ca;
     }

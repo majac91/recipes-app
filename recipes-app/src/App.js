@@ -1,20 +1,27 @@
 import "./App.css";
 import RecipeList from "../src/components/RecipeList/RecipeList";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
+import Recipe from "./components/Recipe/Recipe";
+
 import ToolBar from "@mui/material/Toolbar";
-// import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./theme";
-console.log(theme);
+import Typography from "@mui/material/Typography";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <ToolBar sx={{ borderBottom: 1, borderColor: "divider" }}>
         <AddRecipe />
+        <Typography variant="h1" sx={{ margin: "auto" }}>
+          My recipes
+        </Typography>
       </ToolBar>
-      <h1>My Recipes</h1>
-
-      <RecipeList></RecipeList>
-    </div>
+      <Routes>
+        <Route path="/" element={<RecipeList />} />
+        <Route exact path="/recipe/:id" element={<Recipe />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
