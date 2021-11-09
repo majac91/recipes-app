@@ -24,8 +24,8 @@ const Recipe = () => {
   };
 
   return <>
-    <Container size='lg' sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', mt: 10 }}>
-      <Box sx={{ flex: 1 }}>
+    <Container size='lg' sx={{ display: 'flex', flexWrap: 'wrap', mt: 10, gap: 15 }}>
+      <Box sx={{ flex: 1, borderTop: '1px solid black', borderBottom: '1px solid black' }}>
         <Typography variant='h1' sx={{ mt: 5, mb: 5 }}>{recipe.name}</Typography>
         <Typography sx={{ mb: 3 }} component='div'>
           <Typography sx={{ fontWeight: 'bold' }}>Source:</Typography>
@@ -40,8 +40,9 @@ const Recipe = () => {
           <DeleteIcon />
         </IconButton>
       </Box>
-      <Box sx={{ flex: 2 }}>
-        <Typography>{recipe.instructions}</Typography>
+      <Box sx={{ flex: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', mt: 5, mb: 5 }}>
+        <Typography variant='overline' component='h2'>Preparation:</Typography>
+        <Typography component='p'>{recipe.instructions}</Typography>
       </Box>
     </Container>
   </>;

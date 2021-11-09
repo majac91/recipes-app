@@ -22,14 +22,14 @@ const RecipeListCard = ({ recipe }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: '33%', mr: 'auto' }}>
-      <CardActionArea>
-        <Link to={location} style={{ textDecoration: 'none', color: '#070707' }}>
+    <Link to={location} style={{ textDecoration: 'none', color: '#070707', maxWidth: '30%', width: '100%', mr: 'auto' }}>
+      <Card>
+        <CardActionArea>
           <CardMedia
             component="img"
             height="160"
             image="https://images.unsplash.com/photo-1587394214354-a427608f15cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBhc3RhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-            alt="green iguana"
+            alt="pasta"
           />
           <CardContent>
             <Box>
@@ -64,7 +64,7 @@ const RecipeListCard = ({ recipe }) => {
                   while (index <= 2) {
                     return (
                       <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                        <CheckCircle color='success' sx={{ fontSize: 20 }}></CheckCircle>
+                        <CheckCircle color='success' sx={{ fontSize: 20 }} />
                         <Typography
                           gutterBottom
                           variant="body2"
@@ -99,9 +99,11 @@ const RecipeListCard = ({ recipe }) => {
               {ellipsize(recipe.instructions, 50)}
             </Typography>
           </CardContent>
-        </Link>
-      </CardActionArea>
-    </Card >
+
+        </CardActionArea>
+      </Card>
+    </Link>
+
   );
 };
 
