@@ -27,7 +27,6 @@ const RecipeList = () => {
         list.map((recipe, index) => {
           return (<RecipeListCard key={index} id={index} recipe={recipe} />);
         })}
-
     </Container>
   );
 };

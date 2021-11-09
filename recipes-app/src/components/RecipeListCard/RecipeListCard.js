@@ -3,20 +3,18 @@ import { Link } from "react-router-dom";
 
 import {
   Card,
-  CardActions,
   CardActionArea,
   CardContent,
   CardMedia,
-  Button,
   Typography,
   Box,
 } from "@mui/material";
+
 import CheckCircle from "@mui/icons-material/CheckCircle";
 
 
 const RecipeListCard = ({ recipe }) => {
   const ellipsize = require("ellipsize");
-
 
   const location = {
     pathname: `/recipe/${recipe.id}`,

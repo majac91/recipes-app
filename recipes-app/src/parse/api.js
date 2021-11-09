@@ -31,6 +31,7 @@ export async function uploadRecipe(values) {
   }
 }
 
+// Get the recipe list
 export async function retrieveRecipes() {
   const Recipes = Parse.Object.extend("Recipe");
   const query = new Parse.Query(Recipes);

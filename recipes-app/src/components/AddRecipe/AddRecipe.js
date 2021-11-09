@@ -19,10 +19,7 @@ import {
 } from "@mui/material";
 
 const AddRecipe = () => {
-  const ingredientsList = useSelector((state) => state.ingrediendtList);
-
   const [isOpen, setIsOpen] = useState(false);
-
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -31,6 +28,8 @@ const AddRecipe = () => {
     instructions: "",
     ingredients: null,
   });
+
+  const ingredientsList = useSelector((state) => state.ingrediendtList);
 
   useEffect(() => {
     setFormValues((current) => {
@@ -78,7 +77,7 @@ const AddRecipe = () => {
   };
 
   return (
-    <header>
+    <Box compontent='header'>
       <Fab
         size="small"
         color="success"
@@ -146,7 +145,7 @@ const AddRecipe = () => {
           </Button>
         </Form>
       </RecipeModal>
-    </header >
+    </Box >
   );
 };
 
