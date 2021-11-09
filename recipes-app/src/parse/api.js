@@ -9,6 +9,10 @@ Parse.serverURL = "https://parseapi.back4app.com/";
 
 // Create a new recipe
 export async function uploadRecipe(values) {
+  if (values.ingredients.length < 1) {
+    alert('Enter at least one ingredient')
+    return;
+  }
   let recipe = new Parse.Object("Recipe");
 
   recipe.set("name", values.name);

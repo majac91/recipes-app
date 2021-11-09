@@ -22,11 +22,12 @@ const RecipeList = () => {
   }, [dispatch]);
 
   return (
-    <Container size="lg" sx={{ pt: 10, display: 'flex', gap: 5 }}>
+    <Container size="lg" sx={{ pt: 10, display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 5 }}>
       {list &&
         list.map((recipe, index) => {
-          return <RecipeListCard key={index} id={index} recipe={recipe} />;
+          return (<RecipeListCard key={index} id={index} recipe={recipe} />);
         })}
+
     </Container>
   );
 };

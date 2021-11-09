@@ -27,7 +27,7 @@ const Recipe = () => {
     <Container size='lg' sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', mt: 10 }}>
       <Box sx={{ flex: 1 }}>
         <Typography variant='h1' sx={{ mt: 5, mb: 5 }}>{recipe.name}</Typography>
-        <Typography sx={{ mb: 3 }}>
+        <Typography sx={{ mb: 3 }} component='div'>
           <Typography sx={{ fontWeight: 'bold' }}>Source:</Typography>
           {recipe.source}</Typography>
         <Typography sx={{ fontWeight: 'bold' }}> Ingredients: </Typography>

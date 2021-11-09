@@ -15,6 +15,7 @@ import {
   Input,
   TextareaAutosize,
   Button,
+  Container
 } from "@mui/material";
 
 const AddRecipe = () => {
@@ -106,18 +107,18 @@ const AddRecipe = () => {
 
           <AddIngredient />
 
-          <Box
+          <Container
             sx={{
               display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              flexDirection: 'column', alignItems: "flex-start",
+              pt: 5
             }}
           >
             <TextareaAutosize
               aria-label="instructions"
               minRows={3}
               placeholder="Write the instructions"
-              style={{ width: 300 }}
+              style={{ width: 300, marginBottom: 30 }}
               value={formValues.instructions}
               onChange={(e) => handleFormValues("instructions", e)}
               type="text"
@@ -126,26 +127,26 @@ const AddRecipe = () => {
             <CustomTimePicker
               time={formValues.time}
               handleChange={handleFormValues}
+              style={{ marginBottom: 30 }}
             />
 
             <Input
-              sx={{ m: 3, textAlign: "center" }}
               value={formValues.source}
               onChange={(e) => handleFormValues("source", e)}
               type="text"
               placeholder="Recipe Source"
             />
-          </Box>
-          <SubmitButton
+          </Container>
+          <Button
             variant="outlined"
             type="submit"
             sx={{ alignSelf: "center", mt: 6 }}
           >
             Create
-          </SubmitButton>
+          </Button>
         </Form>
       </RecipeModal>
-    </header>
+    </header >
   );
 };
 
@@ -158,6 +159,8 @@ const RecipeModal = styled(Modal)`
     justify-content: center;
     align-items: center;
     overflow: scroll;
+    max-width: 800px;
+    margin: auto;
   }
 `;
 
@@ -169,12 +172,6 @@ const Form = styled.form`
     max-width: 70vw;
     margin: auto;
     background-color: #FFFDF7;
-  }
-`;
-
-const SubmitButton = styled(Button)`
-   {
-    border-color: black;
-    color: black;
+    padding: 50px;
   }
 `;

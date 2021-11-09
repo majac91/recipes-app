@@ -24,10 +24,9 @@ const RecipeListCard = ({ recipe }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: '33%', mr: 'auto' }}>
       <CardActionArea>
         <Link to={location} style={{ textDecoration: 'none', color: '#070707' }}>
-
           <CardMedia
             component="img"
             height="160"
@@ -39,6 +38,9 @@ const RecipeListCard = ({ recipe }) => {
               <Typography gutterBottom variant="overline" component="h2">
                 {recipe.name}
               </Typography>
+              <Typography variant="body1" color="text.secondary" component="p">
+                ID:{recipe.id}
+              </Typography>
               <Box
                 sx={{
                   display: "flex",
@@ -47,12 +49,10 @@ const RecipeListCard = ({ recipe }) => {
                   gap: 4
                 }}
               >
-                <Typography variant="body1" color="text.secondary" component="p"
-                >
+                <Typography variant="body1" color="text.secondary" component="p">
                   {recipe.source}
                 </Typography>
-                <Typography variant="body1" color="text.secondary" component="p"
-                >
+                <Typography variant="body1" color="text.secondary" component="p">
                   {recipe.time}
                 </Typography>
               </Box>
@@ -82,7 +82,7 @@ const RecipeListCard = ({ recipe }) => {
                 } else {
                   return (
                     <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                      <CheckCircle color='success' sx={{ fontSize: 20 }}></CheckCircle>
+                      <CheckCircle color='success' sx={{ fontSize: 20 }} />
                       <Typography
                         gutterBottom
                         variant="body2"
