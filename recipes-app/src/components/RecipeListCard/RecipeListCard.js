@@ -64,7 +64,7 @@ const RecipeListCard = ({ recipe }) => {
                   if (recipe.ingredients.length >= 2) {
                     while (index <= 2) {
                       return (
-                        <Box key={index}>
+                        <Box key={index} sx={{ display: 'flex' }} mt={2} >
                           <CheckCircle color='success' sx={{ fontSize: 20 }} />
                           <Typography
                             gutterBottom
@@ -80,7 +80,7 @@ const RecipeListCard = ({ recipe }) => {
                     }
                   } else {
                     return (
-                      <Box key={index}>
+                      <Box key={index} sx={{ display: 'flex' }} mt={2}>
                         <CheckCircle color='success' sx={{ fontSize: 20 }} />
                         <Typography
                           gutterBottom
@@ -96,7 +96,7 @@ const RecipeListCard = ({ recipe }) => {
                 })}
 
               </Box>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" mt={2}>
                 {ellipsize(recipe.instructions, 50)}
               </Typography>
             </CardContent>
@@ -104,7 +104,7 @@ const RecipeListCard = ({ recipe }) => {
           </ActionArea>
         </CardWrapper>
       </Link>
-    </Box>
+    </Box >
   );
 };
 
