@@ -53,6 +53,8 @@ export async function retrieveRecipes() {
 
       retreivedList.push(listItem);
     }
+    console.log('executes')
+
     return retreivedList;
 
   } catch {

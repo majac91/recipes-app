@@ -21,6 +21,9 @@ import {
 const AddRecipe = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const [time, setTime] = useState('00:00');
+
+
   const [formValues, setFormValues] = useState({
     name: "",
     source: "",
@@ -38,6 +41,7 @@ const AddRecipe = () => {
   }, [ingredientsList]);
 
   function handleFormValues(key, e) {
+    setTime(e.target.time);
     setFormValues((current) => {
       return { ...current, [key]: key === 'time' ? formattedTime(e.target.value) : e.target.value };
     });
@@ -124,7 +128,7 @@ const AddRecipe = () => {
             />
 
             <CustomTimePicker
-              time={formValues.time}
+              time={time}
               handleChange={handleFormValues}
               style={{ marginBottom: 30 }}
             />
