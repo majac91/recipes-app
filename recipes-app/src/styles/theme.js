@@ -33,10 +33,15 @@ const theme = createTheme({
     },
     typography: {
         h1: {
-            fontFamily: 'Cormorant Garamond',
+            fontFamily: 'Roboto',
             fontWeight: 400,
             fontSize: '2rem',
 
+        },
+        h2: {
+            fontSize: '2.6rem',
+            fontWeight: 600,
+            lineHeight: 1.2
         },
         h3: {
             fontFamily: 'Cormorant Garamond',
@@ -44,13 +49,15 @@ const theme = createTheme({
             fontWeight: 400,
             letterSpacing: '-0.01em',
         },
-        h2: {
-            fontFamily: 'Cormorant Garamond',
-            fontSize: '2.9rem',
-            fontWeight: 600,
-        },
         body1: {
             fontFamily: 'Julius Sans One',
+            fontSize: '1.1rem',
+        },
+        body2: {
+            fontSize: '1rem',
+        },
+        body3: {
+            fontSize: '0.9rem'
         },
         overline: {
             fontSize: '1rem'

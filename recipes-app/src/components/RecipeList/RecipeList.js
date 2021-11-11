@@ -18,7 +18,7 @@ const RecipeList = () => {
       dispatch(setRecipeList(response));
     };
     fetchRecipesList();
-  }, []);
+  }, [dispatch]);
 
   const recipeList = useSelector((state) => state.recipeList.recipeList);
 

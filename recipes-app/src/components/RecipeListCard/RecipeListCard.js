@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Ingredients from "./Ingredients"
 import {
   Card,
   CardActionArea,
@@ -10,7 +10,6 @@ import {
   Box,
 } from "@mui/material";
 
-import CheckCircle from "@mui/icons-material/CheckCircle";
 import styled from 'styled-components'
 
 const RecipeListCard = ({ recipe }) => {
@@ -32,26 +31,25 @@ const RecipeListCard = ({ recipe }) => {
               image="https://images.unsplash.com/photo-1587394214354-a427608f15cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fHBhc3RhfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
               alt="pasta"
             />
+            <Typography variant="body2" color="text.secondary" component="p" sx={{ ml: 'auto', mr: 2, mt: 1 }}>
+              id: {recipe.id}
+            </Typography>
             <CardContent>
               <Box>
-                <Typography gutterBottom variant="overline" component="h2">
+                <Typography variant="overline" component="h2">
                   {recipe.name}
-                </Typography>
-                <Typography variant="body1" color="text.secondary" component="p">
-                  ID:{recipe.id}
                 </Typography>
                 <Box
                   sx={{
                     display: "flex",
-                    mt: 3,
-                    mb: 1,
+                    mb: 3,
                     gap: 4
                   }}
                 >
-                  <Typography variant="body1" color="text.secondary" component="p">
+                  <Typography variant="body3" color="text.secondary" component="p">
                     {recipe.source}
                   </Typography>
-                  <Typography variant="body1" color="text.secondary" component="p">
+                  <Typography variant="body3" color="text.secondary" component="p">
                     {recipe.time}
                   </Typography>
                 </Box>
@@ -60,43 +58,9 @@ const RecipeListCard = ({ recipe }) => {
                 <Typography gutterBottom variant="body1" component="p">
                   Total ingredients: {recipe.ingredients.length}
                 </Typography>
-                {recipe.ingredients.map((ingredient, index) => {
-                  if (recipe.ingredients.length >= 2) {
-                    while (index <= 2) {
-                      return (
-                        <Box key={index} sx={{ display: 'flex' }} mt={2} >
-                          <CheckCircle color='success' sx={{ fontSize: 20 }} />
-                          <Typography
-                            gutterBottom
-                            variant="body2"
-                            component="p"
-                            sx={{ mb: 0 }}
-                          >
-                            {ingredient.name}
-                            {index === 2 && '...'}
-                          </Typography>
-                        </Box>
-                      );
-                    }
-                  } else {
-                    return (
-                      <Box key={index} sx={{ display: 'flex' }} mt={2}>
-                        <CheckCircle color='success' sx={{ fontSize: 20 }} />
-                        <Typography
-                          gutterBottom
-                          variant="body2"
-                          component="p"
-                          sx={{ mb: 0 }}
-                        >
-                          {ingredient.name}
-                        </Typography>
-                      </Box>
-                    );
-                  }
-                })}
-
+                <Ingredients recipe={recipe} />
               </Box>
-              <Typography variant="body2" color="text.secondary" mt={2}>
+              <Typography variant="body2" color="text.primary" mt={3}>
                 {ellipsize(recipe.instructions, 50)}
               </Typography>
             </CardContent>

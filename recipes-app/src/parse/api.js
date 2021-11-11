@@ -53,7 +53,6 @@ export async function retrieveRecipes() {
 
       retreivedList.push(listItem);
     }
-    console.log('executes')
 
     return retreivedList;
 
@@ -61,7 +60,6 @@ export async function retrieveRecipes() {
     alert(`Error`);
   }
 }
-
 
 export async function deleteRecipe(id) {
   const Recipe = Parse.Object.extend("Recipe");
