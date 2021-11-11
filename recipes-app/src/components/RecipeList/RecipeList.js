@@ -23,7 +23,7 @@ const RecipeList = () => {
   const recipeList = useSelector((state) => state.recipeList.recipeList);
 
   return (
-    <Container size='lg' sx={{ mt: 15 }}>
+    <Container size='lg' sx={{ mt: 15, mb: 15 }}>
       <Box size='lg' display="grid" gridTemplateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={5}>
         {recipeList &&
           recipeList.map((recipe, index) => {

@@ -4,10 +4,6 @@ import { uploadRecipe } from "../../parse/api";
 import AddIngredient from "./AddIngredient";
 import CustomTimePicker from "./CustomTimePicker";
 
-import styled from "styled-components";
-
-import AddIcon from "@mui/icons-material/Add";
-
 import {
   Fab,
   Modal,
@@ -17,6 +13,10 @@ import {
   Button,
   Container
 } from "@mui/material";
+
+import styled from "styled-components";
+
+import AddIcon from "@mui/icons-material/Add";
 
 const AddRecipe = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,11 +84,12 @@ const AddRecipe = () => {
     <Box compontent='header'>
       <Fab
         size="small"
-        color="success"
+        color="primary"
         aria-label="add"
         onClick={toggleModal}
       >
-        <AddIcon />
+        <AddIcon fontSize={'16px'}
+        />
       </Fab>
 
       <RecipeModal
