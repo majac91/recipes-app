@@ -11,7 +11,9 @@ import {
   Input,
   TextareaAutosize,
   Button,
-  Container
+  List,
+  ListItem,
+  Typography
 } from "@mui/material";
 
 import styled from "styled-components";
@@ -22,7 +24,6 @@ const AddRecipe = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [time, setTime] = useState('00:00');
-
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -40,7 +41,7 @@ const AddRecipe = () => {
     });
   }, [ingredientsList]);
 
-  function handleFormValues(key, e) {
+  const handleFormValues = (key, e) => {
     setTime(e.target.time);
     setFormValues((current) => {
       return { ...current, [key]: key === 'time' ? formattedTime(e.target.value) : e.target.value };
@@ -49,6 +50,7 @@ const AddRecipe = () => {
 
   const toggleModal = () => {
     setIsOpen((prev) => !prev);
+    clearForm();
   };
 
   const handleSubmit = (e) => {
@@ -56,6 +58,14 @@ const AddRecipe = () => {
 
     uploadRecipe(formValues);
 
+    toggleModal();
+
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000);
+  };
+
+  const clearForm = () => {
     setFormValues({
       name: "",
       source: "",
@@ -63,13 +73,7 @@ const AddRecipe = () => {
       instructions: "",
       ingredients: null,
     })
-
-    toggleModal();
-
-    setTimeout(() => {
-      window.location.reload()
-    }, 1000);
-  };
+  }
 
   const formattedTime = (time) => {
     const [hours, mins] = time.split(":");
@@ -108,39 +112,53 @@ const AddRecipe = () => {
               placeholder="Recipe Name"
             />
           </Box>
-
           <AddIngredient />
 
-          <Container
+          <Box>
+            {formValues.ingredients &&
+              <List sx={{ mt: 3 }}>
+                <Typography color='secondary'>Ingredients:</Typography>
+                {formValues.ingredients.map((ingredient, index) => {
+                  return (
+                    <ListItem disablePadding key={index}>
+                      <Typography>{ingredient.name}</Typography>
+                      <Typography>{ingredient.quantity}</Typography>
+                    </ListItem>
+                  )
+                })}
+              </List>
+            }
+          </Box>
+
+          <Box
             sx={{
               display: "flex",
               flexDirection: 'column', alignItems: "flex-start",
-              pt: 5
+              p: 0,
+              mt: 5
             }}
           >
             <TextareaAutosize
               aria-label="instructions"
-              minRows={3}
+              minRows={5}
               placeholder="Write the instructions"
-              style={{ width: 300, marginBottom: 30 }}
+              style={{ width: '100%', marginBottom: 30 }}
               value={formValues.instructions}
               onChange={(e) => handleFormValues("instructions", e)}
               type="text"
             />
-
             <CustomTimePicker
               time={time}
               handleChange={handleFormValues}
               style={{ marginBottom: 30 }}
             />
-
             <Input
               value={formValues.source}
               onChange={(e) => handleFormValues("source", e)}
               type="text"
               placeholder="Recipe Source"
             />
-          </Container>
+          </Box>
           <Button
             variant="outlined"
             type="submit"
@@ -162,9 +180,12 @@ const RecipeModal = styled(Modal)`
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: scroll;
-    max-width: 800px;
+    overflow: auto;
     margin: auto;
+    max-width: 90vw;
+    @media (min-width: 768px) {
+      max-width: 40vw;
+  }
   }
 `;
 
@@ -173,9 +194,11 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 70vw;
     margin: auto;
     background-color: #FFFDF7;
     padding: 50px;
+    @media (min-width: 768px) {
+    width: 100%;
+  }
   }
 `;

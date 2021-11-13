@@ -1,12 +1,12 @@
 import React from "react";
-import { Input } from "@mui/material";
+import { Input, InputLabel } from "@mui/material";
 
 
 
 const CustomTimePicker = ({ time, handleChange }) => {
   return (
     <>
-      <label>Preparation time</label>
+      <InputLabel>Preparation time</InputLabel>
       <Input
         sx={{ mb: 2 }}
         type="time"

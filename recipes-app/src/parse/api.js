@@ -70,6 +70,7 @@ export async function deleteRecipe(id) {
   try {
     await deleteQuery[0].destroy();
     console.log("The object was deleted successfully.");
+    window.location.reload();
   } catch (e) {
     console.log("Delete failed!", e);
   }

@@ -5,7 +5,9 @@ import { setIngredients } from "../../redux/ingredients";
 import styled from "styled-components";
 
 import AddIcon from "@mui/icons-material/Add";
-import { Checkbox, Input, Fab, Grid } from "@mui/material";
+import {
+  Input, Fab, FormControl, InputLabel, Select, MenuItem, Box
+} from "@mui/material";
 
 const AddIngredient = () => {
   const ingredients = [
@@ -43,40 +45,39 @@ const AddIngredient = () => {
   }
 
   return (
-    <Grid
-      container
-      rowSpacing={1}
-      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-      sx={{ textAlign: "center" }}
-    >
-      {ingredients.map((item, index) => {
-        return (
-          <Grid item xs={6} key={index}>
-            <label>{item}</label>
-            <Checkbox
-              value={item}
-              onChange={(e) => handleIngredientValues("name", e)}
-              type="checkbox"
-            />
-            <label>Quantity</label>
-            <Input
-              onChange={(e) => handleIngredientValues("quantity", e)}
-              type="text"
-              sx={{ maxWidth: "50px" }}
-            />
-            <AddButton
-              size="small"
-              color="primary"
-              aria-label="add"
-              onClick={handleAddIngredient}
-              sx={{ m: 2 }}
-            >
-              <AddIcon />
-            </AddButton>
-          </Grid>
-        );
-      })}
-    </Grid>
+    <>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Ingredient</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={ingredient.name}
+          label="Age"
+          onChange={(e) => handleIngredientValues("name", e)}
+        >
+          {ingredients.map((item, index) => {
+            return (
+              <MenuItem value={item} key={index}>{item}</MenuItem>
+
+            );
+          })}
+        </Select>
+      </FormControl>
+      <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
+        <Input
+          placeholder='Quantity'
+          onChange={(e) => handleIngredientValues("quantity", e)}
+          type="text"
+          sx={{ maxWidth: "100px" }}
+        />
+        <AddButton
+          aria-label="add"
+          onClick={handleAddIngredient}
+        >
+          <AddIcon sx={{ width: '12x', height: '12px' }} />
+        </AddButton>
+      </Box>
+    </>
   );
 };
 
@@ -86,5 +87,7 @@ const AddButton = styled(Fab)`
   && {
     color: black;
     background-color: #fef2e6;
+    width: 38px;
+    height: 38px;
   }
 `;

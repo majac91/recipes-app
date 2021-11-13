@@ -19,7 +19,7 @@ const Recipe = () => {
 
   const handleDelete = () => {
     confirm({ description: 'This action is permanent!' })
-      .then(() => { deleteRecipe(id) }).then(() => navigate('/')).then(() => window.location.relad())
+      .then(() => { deleteRecipe(id) }).then(() => navigate('/'))
       .catch((error) => { console.log(error) });
   };
 
