@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { uploadRecipe } from "../../parse/api";
 import AddIngredient from "./AddIngredient";
-import CustomTimePicker from "./CustomTimePicker";
+import CustomTimePicker from "./TimePicker";
 
 import {
   Fab,
   Modal,
   Box,
   Input,
-  TextareaAutosize,
+  TextField,
   Button,
   List,
   ListItem,
@@ -19,11 +19,12 @@ import {
 import styled from "styled-components";
 
 import AddIcon from "@mui/icons-material/Add";
+import Close from "@mui/icons-material/Close";
 
 const AddRecipe = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [time, setTime] = useState('00:00');
+  const [time, setTime] = useState('00:00'); //input field value (unformatted, unlike the formValues time)
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -95,7 +96,6 @@ const AddRecipe = () => {
         <AddIcon fontSize={'16px'}
         />
       </Fab>
-
       <RecipeModal
         open={isOpen}
         onClose={toggleModal}
@@ -103,6 +103,7 @@ const AddRecipe = () => {
         aria-describedby="a form to create a new recipe"
       >
         <Form onSubmit={(e) => handleSubmit(e)}>
+          <Close sx={{ ml: 'auto' }} onClick={toggleModal} />
           <Box sx={{ pb: 3, textAlign: "center" }}>
             <Input
               sx={{ m: 3, textAlign: "center" }}
@@ -129,7 +130,6 @@ const AddRecipe = () => {
               </List>
             }
           </Box>
-
           <Box
             sx={{
               display: "flex",
@@ -138,9 +138,10 @@ const AddRecipe = () => {
               mt: 5
             }}
           >
-            <TextareaAutosize
+            <TextField
               aria-label="instructions"
               minRows={5}
+              multiline
               placeholder="Write the instructions"
               style={{ width: '100%', marginBottom: 30 }}
               value={formValues.instructions}

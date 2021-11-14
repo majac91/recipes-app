@@ -1,10 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { Typography, Container, Box, List, ListItem, IconButton, Stack } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useConfirm } from 'material-ui-confirm';
 import { deleteRecipe } from '../../parse/api'
+
+import { Typography, Container, Box, List, ListItem, IconButton, Stack } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import styled from 'styled-components';
 
 const Recipe = () => {
   const { id } = useParams();
@@ -25,12 +28,13 @@ const Recipe = () => {
 
   return (
     <Container size='lg'>
-      <Stack size='lg' sx={{ display: 'flex', flexWrap: 'wrap', mt: 10, gap: 15 }} direction={{ xs: 'column', sm: 'row' }} >
-        <Box sx={{ flex: 1, borderTop: '1px solid black', borderBottom: '1px solid black' }}>
+      <Wrapper size='lg' direction={{ xs: 'column', sm: 'row' }} >
+        <SideBar>
           <Typography variant='h1' sx={{ mt: 5, mb: 5 }}>{recipe.name}</Typography>
-          <Typography sx={{ mb: 3 }} component='div'>
+          <Box sx={{ mb: 3 }}>
             <Typography sx={{ fontWeight: 'bold' }}>Source:</Typography>
-            {recipe.source}</Typography>
+            {recipe.source}
+          </Box>
           <Typography sx={{ fontWeight: 'bold' }}> Ingredients: </Typography>
           <List>
             {recipe.ingredients.map((ingredient, index) => {
@@ -40,14 +44,40 @@ const Recipe = () => {
           <IconButton onClick={handleDelete} aria-label="delete" sx={{ pl: 0 }}>
             <DeleteIcon />
           </IconButton>
-        </Box>
-        <Box sx={{ flex: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', mt: 5, mb: 5 }}>
-          <Typography variant='overline' component='h2'>Preparation:</Typography>
+        </SideBar>
+        <Main>
+          <Typography variant='overline' component='h2' sx={{ mt: 5, mb: 5 }} >Preparation:</Typography>
           <Typography component='p'>{recipe.instructions}</Typography>
-        </Box>
-      </Stack>
+        </Main>
+      </Wrapper>
     </Container>
   );
 };
 
 export default Recipe;
+
+
+const Wrapper = styled(Stack)`{
+  display: flex; 
+  flex-wrap: wrap;
+  margin-top: 100px;
+  @media(min-width: 526px) {
+    gap: 80px;
+  }
+  @media(min-width: 768px) {
+    gap: 100px;
+  }
+}`
+
+const SideBar = styled(Box)`{
+flex: 1;
+border-top: 1px solid black;
+border-bottom: 1px solid black;
+}`
+
+const Main = styled(Box)`{
+  display: flex;
+  flex: 3;
+  flex-direction: column;
+  justify-content: flex-start;
+}`

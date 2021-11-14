@@ -3,7 +3,7 @@ import { Input, InputLabel } from "@mui/material";
 
 
 
-const CustomTimePicker = ({ time, handleChange }) => {
+const TimePicker = ({ time, handleChange }) => {
   return (
     <>
       <InputLabel>Preparation time</InputLabel>
@@ -18,4 +18,4 @@ const CustomTimePicker = ({ time, handleChange }) => {
   );
 };
 
-export default CustomTimePicker;
+export default TimePicker;
