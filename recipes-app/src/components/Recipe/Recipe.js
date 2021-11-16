@@ -60,7 +60,7 @@ export default Recipe;
 const Wrapper = styled(Stack)`{
   display: flex; 
   flex-wrap: wrap;
-  margin-top: 100px;
+  margin: 100px 0;
   @media(min-width: 526px) {
     gap: 80px;
   }

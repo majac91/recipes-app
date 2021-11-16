@@ -46,11 +46,11 @@ const AddIngredient = () => {
 
   return (
     <>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Ingredient</InputLabel>
+      <FormControl fullWidth >
+        <InputLabel id="ingredients">Ingredient</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="ingredients"
+          id="ingredients"
           value={ingredient.name}
           label="Age"
           onChange={(e) => handleIngredientValues("name", e)}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { uploadRecipe } from "../../parse/api";
 import AddIngredient from "./AddIngredient";
-import CustomTimePicker from "./TimePicker";
+import TimePicker from "./TimePicker";
 
 import {
   Fab,
@@ -13,13 +13,15 @@ import {
   Button,
   List,
   ListItem,
-  Typography
+  Typography,
+  IconButton
 } from "@mui/material";
 
 import styled from "styled-components";
 
 import AddIcon from "@mui/icons-material/Add";
 import Close from "@mui/icons-material/Close";
+import CheckCircle from "@mui/icons-material/CheckCircle";
 
 const AddRecipe = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -103,10 +105,12 @@ const AddRecipe = () => {
         aria-describedby="a form to create a new recipe"
       >
         <Form onSubmit={(e) => handleSubmit(e)}>
-          <Close sx={{ ml: 'auto' }} onClick={toggleModal} />
+          <IconButton sx={{ ml: 'auto' }} onClick={toggleModal} >
+            <Close />
+          </IconButton>
           <Box sx={{ pb: 3, textAlign: "center" }}>
             <Input
-              sx={{ m: 3, textAlign: "center" }}
+              sx={{ m: 3 }}
               value={formValues.name}
               onChange={(e) => handleFormValues("name", e)}
               type="text"
@@ -114,15 +118,15 @@ const AddRecipe = () => {
             />
           </Box>
           <AddIngredient />
-
           <Box>
             {formValues.ingredients &&
               <List sx={{ mt: 3 }}>
-                <Typography color='secondary'>Ingredients:</Typography>
+                <Typography color='secondary' gutterBottom>Ingredients:</Typography>
                 {formValues.ingredients.map((ingredient, index) => {
                   return (
                     <ListItem disablePadding key={index}>
-                      <Typography>{ingredient.name}</Typography>
+                      <CheckCircle color='success' sx={{ fontSize: 20, mr: 1 }} />
+                      <Typography>{ingredient.name} - </Typography>
                       <Typography>{ingredient.quantity}</Typography>
                     </ListItem>
                   )
@@ -148,7 +152,7 @@ const AddRecipe = () => {
               onChange={(e) => handleFormValues("instructions", e)}
               type="text"
             />
-            <CustomTimePicker
+            <TimePicker
               time={time}
               handleChange={handleFormValues}
               style={{ marginBottom: 30 }}
@@ -183,7 +187,6 @@ const RecipeModal = styled(Modal)`
     align-items: center;
     overflow: auto;
     margin: auto;
-    max-width: 90vw;
     @media (min-width: 768px) {
       max-width: 40vw;
   }
